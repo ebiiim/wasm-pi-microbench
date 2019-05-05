@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"math/rand"
-	"runtime"
 	"syscall/js"
 	"time"
 )
@@ -27,7 +26,6 @@ func main() {
 	elapsed := time.Since(start)
 	log1 := fmt.Sprintf("elapsed time: %v ms", elapsed.Nanoseconds()/1000000)
 	log2 := fmt.Sprintf("iterations: %d, estimated value: %v", iter, pi)
-	log3 := fmt.Sprintf("runtime.Version(): %s", string(runtime.Version()))
-	fmt.Printf("%s\n%s\n%s\n", log1, log2, log3)
-	js.Global().Get("document").Call("getElementById", "resultGo").Set("innerHTML", fmt.Sprintf("%s<br>%s<br>%s", log1, log2, log3))
+	fmt.Printf("%s\n%s\n", log1, log2)
+	js.Global().Get("document").Call("getElementById", "resultGo").Set("innerHTML", fmt.Sprintf("%s<br>%s", log1, log2))
 }
