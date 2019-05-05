@@ -13,7 +13,7 @@ license that can be found in the LICENSE file.
 </head>
 
 <body>
-	<script src="mcpi.js"></script>
+	<script src="src/mcpi.js"></script>
 	<script src="wasm_exec.js"></script>
 	<script>
 		if (!WebAssembly.instantiateStreaming) { // polyfill
@@ -25,7 +25,7 @@ license that can be found in the LICENSE file.
 
 		const go = new Go();
 		let mod, inst;
-		WebAssembly.instantiateStreaming(fetch("mcpi.wasm"), go.importObject).then((result) => {
+		WebAssembly.instantiateStreaming(fetch("mcpi-go.wasm"), go.importObject).then((result) => {
 			mod = result.module;
 			inst = result.instance;
 			document.getElementById("runButton").disabled = false;
