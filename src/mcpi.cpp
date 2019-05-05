@@ -7,6 +7,12 @@
 #include <sstream>
 using namespace std;
 
+#include <emscripten.h>
+
+EM_JS(void, printResults, (const char* log1, const char* log2), {
+  document.getElementById('resultCpp').innerHTML = UTF8ToString(log1,4096) + '<br>' + UTF8ToString(log2,4096);
+});
+
 double mcpi(int loop)
 {
     int c = 0;
@@ -24,6 +30,7 @@ double mcpi(int loop)
     return double(c) / double(loop) * 4.0;
 }
 
+EMSCRIPTEN_KEEPALIVE
 int main()
 {
     int iter = 100000000;
@@ -39,5 +46,6 @@ int main()
     string log2 = ss2.str();
     cout << log1 << "\n"
          << log2 << "\n";
+    printResults(log1.c_str(), log2.c_str());
     return 0;
 }

@@ -13,7 +13,15 @@ license that can be found in the LICENSE file.
 </head>
 
 <body>
+	<!-- JavaScript -->
 	<script src="src/mcpi.js"></script>
+	<script>
+		function runJs() {
+			calcMcpi();
+		}
+	</script>
+
+	<!-- Go -->
 	<script src="wasm_exec.js"></script>
 	<script>
 		if (!WebAssembly.instantiateStreaming) { // polyfill
@@ -33,23 +41,30 @@ license that can be found in the LICENSE file.
 			console.error(err);
 		});
 
-		async function run() {
-			console.clear();
+		async function runGo() {
 			await go.run(inst);
 			inst = await WebAssembly.instantiate(mod, go.importObject); // reset instance
-		}
-
-		function runJs() {
-			calcMcpi();
+		}		
+	</script>
+	
+	<!-- C++ -->
+  <script src="mcpi-cpp.js"></script>
+	<script>
+		function runCpp() {
+			_main();
 		}
 	</script>
 
 	<h1>Monte Carlo PI Estimation Benchmark</h1>
-	<button onClick="run();" id="runButton" disabled>Run (Go+WebAssembly)</button><br>
-	<div id="resultGo"></div>
-	<br>
+
 	<button onClick="runJs();" id="runButtonJs">Run (JavaScript)</button><br>
 	<div id="resultJS"></div>
+	<br>
+	<button onClick="runGo();" id="runButton" disabled>Run (Go)</button><br>
+	<div id="resultGo"></div>
+	<br>
+	<button onClick="runCpp();" id="runButtonCpp">Run (C++)</button><br>
+	<div id="resultCpp"></div>
 
 	<footer>
 		<br>
