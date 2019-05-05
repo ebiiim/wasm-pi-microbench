@@ -36,7 +36,6 @@ license that can be found in the LICENSE file.
 		WebAssembly.instantiateStreaming(fetch("mcpi-go.wasm"), go.importObject).then((result) => {
 			mod = result.module;
 			inst = result.instance;
-			document.getElementById("runButton").disabled = false;
 		}).catch((err) => {
 			console.error(err);
 		});
@@ -57,14 +56,16 @@ license that can be found in the LICENSE file.
 
 	<h1>Monte Carlo PI Estimation Benchmark</h1>
 
-	<button onClick="runJs();" id="runButtonJs">Run (JavaScript)</button><br>
+	<button onClick="runJs();" id="runButtonJs">JavaScript</button><br>
 	<div id="resultJS"></div>
 	<br>
-	<button onClick="runGo();" id="runButton" disabled>Run (Go)</button><br>
+	<button onClick="runGo();" id="runButton">Go</button><br>
 	<div id="resultGo"></div>
 	<br>
-	<button onClick="runCpp();" id="runButtonCpp">Run (C++)</button><br>
+	<button onClick="runCpp();" id="runButtonCpp">C/C++</button><br>
 	<div id="resultCpp"></div>
+	<br>
+	<iframe id="versionInfo" src='info.txt' scrolling='no'></iframe>
 
 	<footer>
 		<br>

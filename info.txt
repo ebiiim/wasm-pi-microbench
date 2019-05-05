@@ -1,0 +1,9 @@
+- Go:
+  - runtime.Version():
+    - go1.12.3
+- C/C++:
+  - emsdk list:
+    - clang-e1.38.30-64bit
+    - node-8.9.1-64bit
+    - emscripten-1.38.30
+    - sdk-1.38.30-64bit
