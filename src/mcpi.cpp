@@ -5,12 +5,13 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+
 using namespace std;
 
 #include <emscripten.h>
 
 EM_JS(void, printResults, (const char* log1, const char* log2), {
-  document.getElementById('resultCpp').innerHTML = UTF8ToString(log1,4096) + '<br>' + UTF8ToString(log2,4096);
+  document.getElementById('resultCpp').innerHTML = UTF8ToString(log1, 4096) + '<br>' + UTF8ToString(log2, 4096);
 });
 
 double mcpi(int loop)
@@ -40,12 +41,11 @@ int main()
     double elapsed = (end - start) / (CLOCKS_PER_SEC / 1000);
     stringstream ss1;
     stringstream ss2;
-    ss1 << "elapsed time: " << elapsed << "ms";
+    ss1 << "elapsed time: " << elapsed << " ms";
     ss2 << "iterations: " << iter << ", estimated value: " << pi;
     string log1 = ss1.str();
     string log2 = ss2.str();
-    cout << log1 << "\n"
-         << log2 << "\n";
+    cout << log1 << "\n" << log2 << "\n";
     printResults(log1.c_str(), log2.c_str());
     return 0;
 }
